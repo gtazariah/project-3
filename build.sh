@@ -6,12 +6,18 @@ DOCKERHUB_USERNAME="azariahgt"
 
 ENVIRONMENT=$1
 
-IMAGE_TAG=${2: -latest}
+IMAGE_TAG=$2
+
+if [ -z "$ENVIRONMENT" ] || [ -z "$IMAGE_TAG" ]; then
+	echo "usage: ./build.sh <dev|prod> <tag>";
+	exit 1
+fi
 
 if [ "$ENVIRONMENT" != "dev" ] && [ "$ENVIRONMENT" != "prod" ]; then
 	echo "Invalid Environment"
 	exit 1
 fi
+
 
 IMAGE_NAME="${DOCKERHUB_USERNAME}/${ENVIRONMENT}"
 
