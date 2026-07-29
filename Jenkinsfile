@@ -48,6 +48,11 @@ pipeline{
 					chmod +x build.sh
 					./build.sh dev ${BUILD_NUMBER}
 				'''
+
+				sh '''
+					chmod +x deploy.sh
+					./deploy.sh dev ${BUILD_NUMBER}
+				'''
 			}
 		}
 
@@ -61,6 +66,11 @@ pipeline{
 				sh '''
 					chmod +x build.sh
 					./build.sh prod ${BUILD_NUMBER}
+				'''
+
+				sh '''
+					chmod +x deploy.sh
+					./deploy.sh prod ${BUILD_NUMBER}
 				'''
 			}
 		}
