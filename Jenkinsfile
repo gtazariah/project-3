@@ -3,6 +3,7 @@ pipeline{
 	environment
 	{
 		DOCKERHUB_USERNAME='azariahgt'
+		APP_SERVER="172.31.23.189"
 	}	
 	stages
 	{
@@ -50,8 +51,8 @@ pipeline{
 				'''
 
 				sh '''
-					chmod +x deploy.sh
-					./deploy.sh dev ${BUILD_NUMBER}
+					ssh -o BatchMode=yes ubuntu@$APP_SERVER \
+					"/home/ubuntu/react-app/deploy.sh dev ${BUILD_NUMBER}"
 				'''
 			}
 		}
@@ -69,8 +70,8 @@ pipeline{
 				'''
 
 				sh '''
-					chmod +x deploy.sh
-					./deploy.sh prod ${BUILD_NUMBER}
+					ssh -o BatchMode=yes ubuntu@$APP_SERVER \
+					"/home/ubuntu/react-app/deploy.sh prod ${BUILD_NUMBER}"
 				'''
 			}
 		}
